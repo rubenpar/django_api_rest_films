@@ -1,7 +1,7 @@
 
 from django.conf.urls import url, include
 from rest_framework.urlpatterns import format_suffix_patterns
-from .views import *
+from .views import PeopleCreateView, StudioCreateView, FilmCreateView
 
 urlpatterns = {
     url(r'^people$', PeopleCreateView.as_view(), name="create"),
