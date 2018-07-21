@@ -62,6 +62,11 @@ class FilmCreateView(generics.ListCreateAPIView):
         Save the post data when creating a new film.
         """
         serializer.save()
+        
+    def retrieve(self,request, year):
+        date = Film.objects.filter(release_date__contains=year)
+        serializer = FilmSerializer(date, many=True)
+        return Response(serializer.data)
 
 class FilmDetailsView(generics.RetrieveUpdateDestroyAPIView):
     """
@@ -70,7 +75,4 @@ class FilmDetailsView(generics.RetrieveUpdateDestroyAPIView):
 
     queryset = Film.objects.all()
     serializer_class = FilmSerializer   
-    def retrieve(self,request, year):
-        date = Film.objects.filter(release_date__contains=year)
-        serializer = FilmSerializer(date, many=True)
-        return Response(serializer.data)
+

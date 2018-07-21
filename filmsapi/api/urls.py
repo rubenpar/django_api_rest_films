@@ -12,7 +12,7 @@ urlpatterns = {
     #     StudioDetailsView.as_view(), name="details"),
     url(r'^film$', FilmCreateView.as_view(), name="create"),
     url(r'^film/(?P<year>[0-9]+)$',
-        FilmDetailsView.as_view(), name="details"),
+        FilmCreateView.as_view(), name="details"),
 }
 
 urlpatterns = format_suffix_patterns(urlpatterns)
