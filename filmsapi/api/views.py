@@ -1,5 +1,7 @@
 from django.shortcuts import render
 from rest_framework import generics
+from rest_framework.response import Response
+
 from .serializers import PeopleSerializer, StudioSerializer, FilmSerializer
 from .models import People, Studio, Film
 
@@ -13,7 +15,7 @@ class PeopleCreateView(generics.ListCreateAPIView):
 
     def perform_create(self, serializer):
         """
-        Save the post data when creating a new bucketlist.
+        Save the post data when creating a new person.
         """
         serializer.save()
 
@@ -35,7 +37,7 @@ class StudioCreateView(generics.ListCreateAPIView):
 
     def perform_create(self, serializer):
         """
-        Save the post data when creating a new bucketlist.
+        Save the post data when creating a new studio.
         """
         serializer.save()
 
@@ -57,7 +59,7 @@ class FilmCreateView(generics.ListCreateAPIView):
 
     def perform_create(self, serializer):
         """
-        Save the post data when creating a new bucketlist.
+        Save the post data when creating a new film.
         """
         serializer.save()
 
@@ -67,4 +69,8 @@ class FilmDetailsView(generics.RetrieveUpdateDestroyAPIView):
     """
 
     queryset = Film.objects.all()
-    serializer_class = FilmSerializer
+    serializer_class = FilmSerializer   
+    def retrieve(self,request, year):
+        date = Film.objects.filter(release_date__contains='2018')
+        serializer = FilmSerializer(date, many=True)
+        return Response(serializer.data)

@@ -27,7 +27,7 @@ curl --header "Content-Type: application/json" --request POST --data '{
 
 Create second film
 curl --header "Content-Type: application/json" --request POST --data '{
-        "title": "first film",
+        "title": "second film",
         "studio": "studio_b",
         "release_date": "3rd May 2018",
         "director": "person_d",
@@ -38,24 +38,8 @@ curl --header "Content-Type: application/json" --request POST --data '{
         ]
     }' http://127.0.0.1:8000/api/film/
 
-GET People:
-curl --header "Content-Type: application/json" --request GET  http://127.0.0.1:8000/api/people/
-
-POST Studio:
-curl --header "Content-Type: application/json" --request POST --data '{"name":"warner","city":"Los Angeles"}' http://127.0.0.1:8000/api/studio/
-
-GET Studio:
-curl --header "Content-Type: application/json" --request GET  http://127.0.0.1:8000/api/studio/
-
+Retrieve all film
 curl --header "Content-Type: application/json" --request GET  http://127.0.0.1:8000/api/film/
 
-    {
-        "title": "first film",
-        "studio": "studio_a",
-        "release_date": "1st February 2017",
-        "director": "person_a",
-        "actors": [
-            "person_b",
-            "person_c"
-        ]
-    }
+Retrieve all people
+curl --header "Content-Type: application/json" --request GET  http://127.0.0.1:8000/api/people/
