@@ -41,5 +41,8 @@ curl --header "Content-Type: application/json" --request POST --data '{
 Retrieve all film
 curl --header "Content-Type: application/json" --request GET  http://127.0.0.1:8000/api/film/
 
+Retrieve films release in 2018
+curl --header "Content-Type: application/json" --request GET  http://127.0.0.1:8000/api/film/2018
+
 Retrieve all people
 curl --header "Content-Type: application/json" --request GET  http://127.0.0.1:8000/api/people/
