@@ -1,0 +1,6 @@
+POST People:
+curl --header "Content-Type: application/json" --request POST --data '{"name":"Javier Cansado","birth_date":"02/01/1965"}' http://127.0.0.1:8000/api/people/
+
+GET People:
+curl --header "Content-Type: application/json" --request GET  http://127.0.0.1:8000/api/people/
+
