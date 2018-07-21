@@ -3,15 +3,15 @@ email: admin@admin.com
 password: film_api
 
 Create 5 people:
-curl --header "Content-Type: application/json" --request POST --data '{"name":"person_a","birth_date":"02/01/1965"}' http://127.0.0.1:8000/api/people/ &&
-curl --header "Content-Type: application/json" --request POST --data '{"name":"person_b","birth_date":"02/02/1975"}' http://127.0.0.1:8000/api/people/ &&
-curl --header "Content-Type: application/json" --request POST --data '{"name":"person_c","birth_date":"02/03/1985"}' http://127.0.0.1:8000/api/people/ &&
-curl --header "Content-Type: application/json" --request POST --data '{"name":"person_d","birth_date":"02/04/1995"}' http://127.0.0.1:8000/api/people/ &&
-curl --header "Content-Type: application/json" --request POST --data '{"name":"person_e","birth_date":"02/05/1987"}' http://127.0.0.1:8000/api/people/
+curl --header "Content-Type: application/json" --request POST --data '{"name":"person_a","birth_date":"02/01/1965"}' http://127.0.0.1:8000/api/people &&
+curl --header "Content-Type: application/json" --request POST --data '{"name":"person_b","birth_date":"02/02/1975"}' http://127.0.0.1:8000/api/people &&
+curl --header "Content-Type: application/json" --request POST --data '{"name":"person_c","birth_date":"02/03/1985"}' http://127.0.0.1:8000/api/people &&
+curl --header "Content-Type: application/json" --request POST --data '{"name":"person_d","birth_date":"02/04/1995"}' http://127.0.0.1:8000/api/people &&
+curl --header "Content-Type: application/json" --request POST --data '{"name":"person_e","birth_date":"02/05/1987"}' http://127.0.0.1:8000/api/people
 
 Create 2 studios
-curl --header "Content-Type: application/json" --request POST --data '{"name":"studio_a","city":"Los Angeles"}' http://127.0.0.1:8000/api/studio/ &&
-curl --header "Content-Type: application/json" --request POST --data '{"name":"studio_b","city":"San Francisco"}' http://127.0.0.1:8000/api/studio/
+curl --header "Content-Type: application/json" --request POST --data '{"name":"studio_a","city":"Los Angeles"}' http://127.0.0.1:8000/api/studio &&
+curl --header "Content-Type: application/json" --request POST --data '{"name":"studio_b","city":"San Francisco"}' http://127.0.0.1:8000/api/studio
 
 Create first film
 curl --header "Content-Type: application/json" --request POST --data '{
@@ -23,7 +23,7 @@ curl --header "Content-Type: application/json" --request POST --data '{
             "person_b",
             "person_c"
         ]
-    }' http://127.0.0.1:8000/api/film/
+    }' http://127.0.0.1:8000/api/film
 
 Create second film
 curl --header "Content-Type: application/json" --request POST --data '{
@@ -36,13 +36,13 @@ curl --header "Content-Type: application/json" --request POST --data '{
             "person_b",
             "person_e"
         ]
-    }' http://127.0.0.1:8000/api/film/
+    }' http://127.0.0.1:8000/api/film
 
 Retrieve all film
-curl --header "Content-Type: application/json" --request GET  http://127.0.0.1:8000/api/film/
+curl --header "Content-Type: application/json" --request GET  http://127.0.0.1:8000/api/film
 
 Retrieve films release in 2018
 curl --header "Content-Type: application/json" --request GET  http://127.0.0.1:8000/api/film/2018
 
 Retrieve all people
-curl --header "Content-Type: application/json" --request GET  http://127.0.0.1:8000/api/people/
+curl --header "Content-Type: application/json" --request GET  http://127.0.0.1:8000/api/people

@@ -71,6 +71,6 @@ class FilmDetailsView(generics.RetrieveUpdateDestroyAPIView):
     queryset = Film.objects.all()
     serializer_class = FilmSerializer   
     def retrieve(self,request, year):
-        date = Film.objects.filter(release_date__contains='2018')
+        date = Film.objects.filter(release_date__contains=year)
         serializer = FilmSerializer(date, many=True)
         return Response(serializer.data)
