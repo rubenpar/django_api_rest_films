@@ -1,12 +1,13 @@
 from django.shortcuts import render
 from rest_framework import generics
-from .serializers import PeopleSerializer
-from .models import People
+from .serializers import PeopleSerializer, StudioSerializer
+from .models import People, Studio
 
 class PeopleCreateView(generics.ListCreateAPIView):
     """
     This class defines the create behavior of the rest api.
     """
+
     queryset = People.objects.all()
     serializer_class = PeopleSerializer
 
@@ -23,3 +24,24 @@ class PeopleDetailsView(generics.RetrieveUpdateDestroyAPIView):
 
     queryset = People.objects.all()
     serializer_class = PeopleSerializer
+
+class StudioCreateView(generics.ListCreateAPIView):
+    """
+    This class defines the create behavior of the rest api.
+    """
+    queryset = Studio.objects.all()
+    serializer_class = StudioSerializer
+
+    def perform_create(self, serializer):
+        """
+        Save the post data when creating a new bucketlist.
+        """
+        serializer.save()
+
+class StudioDetailsView(generics.RetrieveUpdateDestroyAPIView):
+    """
+    This class handles the http GET, PUT and DELETE requests.
+    """
+
+    queryset = Studio.objects.all()
+    serializer_class = StudioSerializer

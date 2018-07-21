@@ -13,13 +13,17 @@ class People(models.Model):
         """Return a human readable representation of the model instance."""
         return "{}".format(self.name)
 
-# class Studio(models.Model):
-#     """
-#     Model describing studio table structure
-#     """
+class Studio(models.Model):
+    """
+    Model describing studio table structure
+    """
 
-#     name = models.CharField(max_length=150, help_text='Enter the name (e.g. Warner Bros)')
-#     city = models.CharField(max_length=150, help_text='Enter the city name (e.g. Los Angeles)')
+    name = models.CharField(max_length=150, help_text='Enter the name (e.g. Warner Bros)')
+    city = models.CharField(max_length=150, help_text='Enter the city name (e.g. Los Angeles)')
+
+    def __str__(self):
+        """Return a human readable representation of the model instance."""
+        return "{}".format(self.name)
 
 # class Film(models.Model):
 #     """

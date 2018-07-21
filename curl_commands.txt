@@ -8,3 +8,9 @@ curl --header "Content-Type: application/json" --request POST --data '{"name":"J
 GET People:
 curl --header "Content-Type: application/json" --request GET  http://127.0.0.1:8000/api/people/
 
+POST Studio:
+curl --header "Content-Type: application/json" --request POST --data '{"name":"warner","city":"Los Angeles"}' http://127.0.0.1:8000/api/studio/
+
+GET Studio:
+curl --header "Content-Type: application/json" --request GET  http://127.0.0.1:8000/api/studio/
+
