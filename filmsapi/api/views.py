@@ -19,14 +19,6 @@ class PeopleCreateView(generics.ListCreateAPIView):
         """
         serializer.save()
 
-class PeopleDetailsView(generics.RetrieveUpdateDestroyAPIView):
-    """
-    This class handles the http GET, PUT and DELETE requests.
-    """
-
-    queryset = People.objects.all()
-    serializer_class = PeopleSerializer
-
 
 class StudioCreateView(generics.ListCreateAPIView):
     """
@@ -41,14 +33,6 @@ class StudioCreateView(generics.ListCreateAPIView):
         """
         serializer.save()
 
-class StudioDetailsView(generics.RetrieveUpdateDestroyAPIView):
-    """
-    This class handles the http GET, PUT and DELETE requests.
-    """
-
-    queryset = Studio.objects.all()
-    serializer_class = StudioSerializer
-
 
 class FilmCreateView(generics.ListCreateAPIView):
     """
@@ -62,17 +46,9 @@ class FilmCreateView(generics.ListCreateAPIView):
         Save the post data when creating a new film.
         """
         serializer.save()
-        
+
     def retrieve(self,request, year):
         date = Film.objects.filter(release_date__contains=year)
         serializer = FilmSerializer(date, many=True)
         return Response(serializer.data)
-
-class FilmDetailsView(generics.RetrieveUpdateDestroyAPIView):
-    """
-    This class handles the http GET, PUT and DELETE requests.
-    """
-
-    queryset = Film.objects.all()
-    serializer_class = FilmSerializer   
 
