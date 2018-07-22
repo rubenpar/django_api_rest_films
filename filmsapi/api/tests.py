@@ -103,53 +103,68 @@ class APITestCase(TestCase):
                      "director": "test_c",
                     "actors": ["test_c"]
                    }
-
-    def test_api_can_create_a_person(self):
-        """
-        Test the api has person creation capability.
-        """
-
+        # create a person
         self.response = self.client.post(
             reverse("create_person"),
             self.actor_data,
             format="json")
-        self.assertEqual(self.response.status_code, status.HTTP_201_CREATED)
-    
-    def test_api_can_create_a_studio(self):
-        """
-        Test the api has studio creation capability.
-        """
 
+        # create a studio
         self.response = self.client.post(
             reverse("create_studio"),
             self.studio_data,
             format="json")
+
+        # create a film
+        self.response = self.client.post(
+            reverse("create_film"),
+            data=self.film_data,
+            format="json")
+
+    def test_api_can_post(self):
+        """
+        Test the api can handle POST requests.
+        """
+
+        # check person created
         self.assertEqual(self.response.status_code, status.HTTP_201_CREATED)
 
-    # def test_api_can_create_a_film(self):
-    #     """
-    #     Test the api has film creation capability.
-    #     """
-
-    #     print(Studio.objects.all())
-    #     self.response = self.client.post(
-    #         reverse("create_film"),
-    #         self.film_data,
-    #         format="json")
-    #     self.assertEqual(self.response.status_code, status.HTTP_201_CREATED)
-
-    # def test_api_can_get_people(self):
-    #     """
-    #     Test the api can get the people list.
-    #     """
-
-    #     people = People.objects.get()
-    #     response = self.client.get(
-    #         reverse("details",
-    #         kwargs={"pk": people.id}),
-    #         format="json"
-    #     )
-    #     self.assertEqual(response.status_code, status.HTTP_200_OK)
-    #     self.assertContains(response, people)
-
+        # check studio created
+        self.assertEqual(self.response.status_code, status.HTTP_201_CREATED)
     
+        # check film created
+        self.assertEqual(self.response.status_code, status.HTTP_201_CREATED)   
+
+    def test_api_can_get(self):
+        """
+        Test the api can handle POST requests.
+        """
+
+        # get all people
+        people = People.objects.get()
+        response = self.client.get(
+            reverse("create_person"),
+            format="json"
+        )
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        self.assertContains(response, people)
+
+        # get all studios
+        studio = Studio.objects.get()
+        response = self.client.get(
+            reverse("create_studio"),
+            format="json"
+        )
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        self.assertContains(response, studio)
+
+        # get all films
+        film = Film.objects.get()
+        response = self.client.get(
+            reverse("create_film"),
+            format="json"
+        )
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        self.assertContains(response, film)
+
+   
