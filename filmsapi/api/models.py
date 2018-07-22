@@ -27,7 +27,7 @@ class Studio(models.Model):
 
 class Film(models.Model):
     """
-    Class representing the Film Model
+    Model describing studio film structure
     """
 
     title = models.CharField(max_length=255, blank = False)
@@ -40,7 +40,3 @@ class Film(models.Model):
         """Return a human readable representation of the model instance."""
         return "{}".format(self.title)
 
-
-# class People_Film(models.Model):
-#     name = models.ForeignKey(People, on_delete=models.CASCADE)
-#     title = models.ForeignKey(Film, on_delete=models.CASCADE)
