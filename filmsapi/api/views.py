@@ -17,7 +17,7 @@ class PeopleCreateView(generics.ListCreateAPIView):
 
     def post(self,request, format=None):
         """
-            Save the post data when creating a new film.
+            Save the post data when creating a new person.
         """
 
         serializer = PeopleSerializer(data=request.data)
@@ -42,13 +42,27 @@ class StudioCreateView(generics.ListCreateAPIView):
 
     serializer_class = StudioSerializer
 
+    
+    def post(self,request, format=None):
+        """
+            Save the post data when creating a new studio.
+        """
+
+        serializer = StudioSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
     def get(self,request):
         """
-            Return all the people
+            Return all the studios
         """
         studio_list = Studio.objects.all()
         serializer = StudioSerializer(studio_list, many=True)
         return Response(serializer.data)
+
+
 
 
 class FilmCreateView(generics.ListCreateAPIView):
@@ -88,7 +102,7 @@ class FilmCreateView(generics.ListCreateAPIView):
 
     def get(self,request):
         """
-            Return all the film release on 'year'
+            Return all the films listed on the database
         """
         date = Film.objects.all()
         serializer = FilmSerializer(date, many=True)
@@ -97,13 +111,15 @@ class FilmCreateView(generics.ListCreateAPIView):
 
 class FilmYearCreateView(generics.ListCreateAPIView):
     """
-    This class defines the create behavior of the rest api.
+    This class defines the GET method
     """
 
+    http_method_names = ['get']
     serializer_class = FilmSerializer
+
     def get(self,request, year):
         """
-            Return all the film release on 'year'
+            Return all the films released on {year}
         """
         date = Film.objects.filter(release_date__contains=year)
         serializer = FilmSerializer(date, many=True)
