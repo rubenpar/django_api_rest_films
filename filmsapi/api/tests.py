@@ -84,28 +84,58 @@ class FilmTestCase(TestCase):
 #################
 ## Test Api ##
 #################
-# class PeopleViewTestCase(TestCase):
-#     """
-#     Test suite for the api views.
-#     """
+class APITestCase(TestCase):
+    """
+    Test post case.
+    """
 
-#     def setUp(self):
-#         """
-#         Define the test client and other test variables.
-#         """
+    def setUp(self):
+        """
+        Define the test client and other test variables.
+        """
 
-#         self.client = APIClient()
-#         self.actor_data = {'name': 'Christopher Nolan', 'birth_date': '02/02/1975'}
-#         self.response = self.client.post(
-#             reverse('create'),
-#             self.actor_data,
-#             format="json")
+        self.client = APIClient()
+        self.actor_data = {"name": "test_c", "birth_date": "02/02/1975"}
+        self.studio_data = {"name": "test_c", "city": "Madrid"}
+        self.film_data = {"title": "test_film",
+                    "studio": "test_c",
+                    "release_date": "3rd May 2018",
+                     "director": "test_c",
+                    "actors": ["test_c"]
+                   }
 
-#     def test_api_can_create_a_person(self):
-#         """
-#         Test the api has person creation capability.
-#         """
+    def test_api_can_create_a_person(self):
+        """
+        Test the api has person creation capability.
+        """
 
+        self.response = self.client.post(
+            reverse("create_person"),
+            self.actor_data,
+            format="json")
+        self.assertEqual(self.response.status_code, status.HTTP_201_CREATED)
+    
+    def test_api_can_create_a_studio(self):
+        """
+        Test the api has studio creation capability.
+        """
+
+        self.response = self.client.post(
+            reverse("create_studio"),
+            self.studio_data,
+            format="json")
+        self.assertEqual(self.response.status_code, status.HTTP_201_CREATED)
+
+    # def test_api_can_create_a_film(self):
+    #     """
+    #     Test the api has film creation capability.
+    #     """
+
+    #     print(Studio.objects.all())
+    #     self.response = self.client.post(
+    #         reverse("create_film"),
+    #         self.film_data,
+    #         format="json")
     #     self.assertEqual(self.response.status_code, status.HTTP_201_CREATED)
 
     # def test_api_can_get_people(self):
@@ -115,9 +145,9 @@ class FilmTestCase(TestCase):
 
     #     people = People.objects.get()
     #     response = self.client.get(
-    #         reverse('details',
-    #         kwargs={'pk': people.id}),
-    #         format='json'
+    #         reverse("details",
+    #         kwargs={"pk": people.id}),
+    #         format="json"
     #     )
     #     self.assertEqual(response.status_code, status.HTTP_200_OK)
     #     self.assertContains(response, people)
