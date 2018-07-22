@@ -46,3 +46,16 @@ curl --header "Content-Type: application/json" --request GET  http://127.0.0.1:8
 
 Retrieve all people
 curl --header "Content-Type: application/json" --request GET  http://127.0.0.1:8000/api/people
+
+
+curl --header "Content-Type: application/json" --request POST --data '{
+        "title": "third film",
+        "studio": "studio_b",
+        "release_date": "3rd May 2018",
+        "director": "person_d",
+        "actors": [
+            "person_a",
+            "person_b",
+            "person_e"
+        ]
+    }' http://127.0.0.1:8000/api/film
