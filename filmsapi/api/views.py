@@ -1,11 +1,9 @@
-from django.shortcuts import render
 from rest_framework import generics
 from rest_framework.response import Response
 from rest_framework import status
 
 from .serializers import PeopleSerializer, StudioSerializer, FilmSerializer
 from .models import People, Studio, Film
-
 
 
 class PeopleCreateView(generics.ListCreateAPIView):
@@ -15,7 +13,7 @@ class PeopleCreateView(generics.ListCreateAPIView):
 
     serializer_class = PeopleSerializer
 
-    def post(self,request, format=None):
+    def post(self, request, *args, **kwargs):
         """
             Save the post data when creating a new person.
         """
@@ -26,7 +24,7 @@ class PeopleCreateView(generics.ListCreateAPIView):
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
-    def get(self,request):
+    def get(self, request, *args, **kwargs):
         """
             Return all the people
         """
@@ -42,8 +40,7 @@ class StudioCreateView(generics.ListCreateAPIView):
 
     serializer_class = StudioSerializer
 
-    
-    def post(self,request, format=None):
+    def post(self, request, *args, **kwargs):
         """
             Save the post data when creating a new studio.
         """
@@ -54,15 +51,13 @@ class StudioCreateView(generics.ListCreateAPIView):
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
-    def get(self,request):
+    def get(self, request, *args, **kwargs):
         """
             Return all the studios
         """
         studio_list = Studio.objects.all()
         serializer = StudioSerializer(studio_list, many=True)
         return Response(serializer.data)
-
-
 
 
 class FilmCreateView(generics.ListCreateAPIView):
@@ -72,7 +67,7 @@ class FilmCreateView(generics.ListCreateAPIView):
     
     serializer_class = FilmSerializer
 
-    def post(self,request, format=None):
+    def post(self, request, *args, **kwargs):
         """
             Save the post data when creating a new film.
         """
@@ -80,11 +75,11 @@ class FilmCreateView(generics.ListCreateAPIView):
         try:
             # get studio if from name
             studio_id = Studio.objects.get(name=request.data["studio"]).id
-            request.data["studio"]=studio_id
+            request.data["studio"] = studio_id
 
             # get people id from name
             director_id = People.objects.get(name=request.data["director"]).id
-            request.data["director"]=director_id
+            request.data["director"] = director_id
 
             # get actors id from name
             actors_id=[]
@@ -101,7 +96,7 @@ class FilmCreateView(generics.ListCreateAPIView):
         except Exception as e:
             return Response(e, status=status.HTTP_400_BAD_REQUEST)
 
-    def get(self,request):
+    def get(self, request, *args, **kwargs):
         """
             Return all the films listed on the database
         """
@@ -118,7 +113,8 @@ class FilmYearCreateView(generics.ListCreateAPIView):
     http_method_names = ['get']
     serializer_class = FilmSerializer
 
-    def get(self,request, year):
+    # TODO: update method definition to PEP8
+    def get(self, request, year, **kwargs):
         """
             Return all the films released on {year}
         """
